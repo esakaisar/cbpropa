@@ -1,0 +1,547 @@
+/* Importing Google Fonts */
+@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Requiner&display=swap');
+
+/* CSS Variables for easier theme management */
+:root {
+    --primary-color: #8b66a8; /* Changed to pinkish */
+    --background-color: #29005f; /* Changed to a lighter pink */
+    --white: #fff;
+    --light-gray: lightgray;
+    --dark-gray: #272727; /* Changed black color */
+}
+
+/* Body styles */
+body {
+    background: var(--background-color);
+    padding: 0;
+    margin: 0;
+    font-family: 'Quicksand', sans-serif; /* Changed to Quicksand */
+}
+
+/* Chat button styles */
+.chat-button {
+    padding: 10px 15px;
+    background: var(--primary-color);
+    width: auto;
+    position: absolute;
+    bottom: 0; /* Corrected this line */
+    right: 0; /* Corrected this line */
+    margin: 15px;
+    border-radius: 25px; /* Corrected this line */
+    box-shadow: 0 2px 15px rgba(44, 80, 239, 0.21);
+    cursor: pointer;
+    border-bottom-right-radius: 0;
+    animation: buttonglow 6s infinite alternate, chat-button-breathe 6s infinite alternate;
+    transition: background-color 0.3s, transform 0.3s; /* Animation on hover */
+}
+
+/* Breathing animation for chat button */
+@keyframes chat-button-breathe {
+    0%, 100% {
+        transform: translateY(0); /* Start position */
+    }
+    50% {
+        transform: translateY(-5px); /* Move up */
+    }
+}
+
+/* Chat button hover effect */
+.chat-button:hover {
+    background-color: #ff5a8d; /* Change color on hover */
+}
+
+/* Glowing animation */
+@keyframes buttonglow {
+    0% {
+        box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.15); /* Purple glow */
+    }
+    50% {
+        box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.50); /* Pink glow */
+    }
+    100% {
+        box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.15); /* Purple glow */
+    }
+}
+
+/* Initial glow animation */
+@keyframes initialGlow {
+    0% {
+        box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0); /* Match the starting color */
+    }
+    100% {
+        box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.15); /* Match the ending color */
+    }
+}
+
+/* Add a class for the initial glow effect */
+.initial-glow {
+    animation: initialGlow 1.286s forwards; /* Play the initial glow animation */
+}
+
+/* Add a class for the looping glow effect */
+.buttonglow {
+    animation: buttonglow 6s infinite; /* Looping glow animation */
+}
+
+/* Chat button label styles */
+.chat-button span {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 13px;
+    color: white;
+    display: inline-block; /* Allow the text to be transformed */
+    transition: transform 0.3s; /* Smooth transition for text movement */
+}
+
+/* Chat button hover effect for text */
+.chat-button:hover span {
+    transform: translateY(-1px) scale(1.05); /* Move text up on hover */
+}
+
+.chat-button .bold {
+    font-weight: bold;
+}
+
+.chat-button span::after {
+    content: "";
+    position: absolute;
+    left: 50px;
+    top: 18px;
+}
+
+/* Chat box styles */
+.chat-box {
+    height: 90%;
+    width: 400px;
+    position: absolute;
+    right: 15px; /* Align to the right with margin */
+    bottom: 15px; /* Align to the bottom with margin */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    z-index: 15;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.005);
+    right: 0;
+    bottom: 0;
+    margin: 15px;
+    background: var(--white);
+    border-radius: 25px; /* More rounded edges */
+    visibility: hidden; /* Initially hidden */
+    transform: scale(0.5); /* Start scaled down and offset by margin */
+    opacity: 0;
+    transition: visibility 0s linear 0.3s, opacity 0.3s ease, transform 0.3s ease; /* Animation for showing */
+    transform-origin: bottom right; /* Scale from bottom right */
+}
+
+/* Chat box header styles */
+.chat-box-header {
+    height: 8%;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    display: flex;
+    align-items: center; /* Vertically center items */
+    font-size: 14px;
+    padding: .5em 0;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.025);
+}
+
+/* Title styles */
+.chat-box-header h3 {
+    font-family: 'Quicksand', sans-serif; /* Changed to Quicksand */
+    font-weight: 400;
+    margin-left: 25px;
+}
+
+/* Header actions container */
+.header-actions {
+    margin-left: auto; /* Pushes the close button to the right */
+    display: flex; /* Use flexbox for horizontal alignment */
+    align-items: center; /* Vertically center items */
+}
+
+/* Close button styles */
+.chat-box-header p.close-button {
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    line-height: 2.25;
+    margin: 0;
+    margin-right: 15px;
+    border-radius: 25px;
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+/* Change color of the close button icon */
+.chat-box-header p i {
+    color: lightgray; /* Replace with your desired color */
+}
+
+/* Close button hover effect */
+.chat-box-header p:hover {
+    background-color: #f0f0f0; /* Light gray on hover */
+}
+
+/* Chat box body styles */
+.chat-box-body {
+    height: 75%;
+    background: #f8f8f8;
+    overflow-y: scroll;
+    padding: 12px;
+    display: flex;
+    flex-direction: column; /* Ensure vertical stacking */
+}
+
+/* Message styles */
+.chat-box-body-send,
+.chat-box-body-receive {
+    width: auto; /* Allow width to adjust */
+    max-width: 250px; /* Max width for messages */
+    padding: 10px 15px; /* Standardized padding for both sender and receiver */
+    border-radius: 25px; /* More rounded edges */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.015);
+    margin-bottom: 10px; /* Reduced margin to remove gaps */
+    margin-left: 10px;
+    opacity: 0; /* Initially hidden */
+    transform: translateY(10px); /* Start slightly lower */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Animation for showing */
+}
+
+/* Sender message styles */
+.chat-box-body-send {
+    background: var(--white);
+    align-self: flex-end; /* Align to the right */
+    font-size: 14px; /* Standardized font size */
+}
+
+/* Receiver message styles */
+.chat-box-body-receive {
+    align-self: flex-start; /* Align to the left */
+    background-color: #f1f1f1; /* Background color for receiver's bubble */
+    font-size: 14px; /* Standardized font size */
+}
+
+/* Latest receiver message styles */
+.chat-box-body-receive.latest {
+    border-bottom-left-radius: 0; /* Remove rounded corner for bottom-left */
+    animation: glow 3s infinite alternate; /* Slowed down glow animation */
+}
+
+/* Glowing animation */
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 15px 5px rgba(255, 105, 180, 0.30); /* Purple glow */
+    }
+    50% {
+        box-shadow: 0 0 15px 5px rgba(128, 0, 128, 0.15); /* Pink glow */
+    }
+    100% {
+        box-shadow: 0 0 15px 5px rgba(255, 105, 180, 0.30); /* Purple glow */
+    }
+}
+
+/* Adjust the margin for the last message to avoid gaps */
+.chat-box-body-receive:not(:last-child) {
+    margin-bottom: 10px; /* Space between messages */
+}
+
+/* Message styles */
+.chat-box-body-send,
+.chat-box-body-receive {
+    width: auto; /* Allow width to adjust */
+    max-width: 250px; /* Max width for messages */
+    padding: 10px 15px; /* Adjusted padding for consistency */
+    border-radius: 25px; /* More rounded edges */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.015);
+    margin-bottom: 10px; /* Reduced margin to remove gaps */
+    margin-left: 10px;
+    opacity: 0; /* Initially hidden */
+    transform: translateY(10px); /* Start slightly lower */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Animation for showing */
+}
+
+/* Message text styles */
+.chat-box-body-send div,
+.chat-box-body-receive div {
+    margin: 0; /* Remove margin */
+    padding: 0; /* Remove padding */
+    border-radius: 0; /* Remove border radius */
+    color: var(--dark-gray); /* Text color */
+    font-size: 14px; /* Adjust font size if necessary */
+}
+
+/* Center align the receiver's message text */
+.chat-box-body-receive div {
+    text-align: left; /* Align text to the left */
+}
+
+/* Center align the sender's message text */
+.chat-box-body-send div {
+    text-align: right; /* Align text to the right */
+}
+
+/* Bot profile picture styles */
+.bot-profile-pic {
+    width: 40px; /* Set width for the profile picture */
+    height: 40px; /* Set height for the profile picture */
+    position: relative; /* Position relative for animation */
+    margin-top: -20px; /* Adjust margin to bring it closer to the bubble */
+    margin-left: -5px;
+    animation: breathe 3s ease-in-out infinite; /* Breathing animation */
+    filter: drop-shadow(0 0 10px rgb(255, 255, 255)); /* Glow effect */
+}
+
+/* Breathing animation */
+@keyframes breathe {
+    0%, 100% {
+        transform: translateY(0); /* Start position */
+    }
+    50% {
+        transform: translateY(-5px); /* Move up */
+    }
+}
+
+/* Placeholder for previous messages */
+.previous-profile-pic {
+    width: 30px; /* Size of the gray dot */
+    height: 30px; /* Size of the gray dot */
+    border-radius: 50%; /* Make it circular */
+    background-color: lightgray; /* Gray color */
+    margin-right: 10px; /* Space between the dot and the message text */
+    display: inline-block; /* Ensure it's displayed as an inline element */
+}
+
+/* Chat box footer styles */
+.chat-box-footer {
+    display: flex;
+    justify-content: center; /* Center the container */
+    padding: 10px; /* Add some padding */
+}
+
+/* Input button container styles */
+.input-button-container {
+    position: relative; /* Position relative for absolute positioning of the button */
+    width: 100%; /* Full width of the container */
+    max-width: 600px; /* Optional: set a max width for the input area */
+}
+
+/* Input field styles */
+.chat-box-footer input {
+    padding: 10px 40px 10px 10px; /* Add padding to the input, extra right padding for button */
+    border: none;
+    border-radius: 50px; /* Match the button's border radius */
+    background: whitesmoke;
+    font-family: 'Quicksand', sans-serif; /* Changed to Quicksand */
+    font-weight: 600;
+    color: #444;
+    width: 100%; /* Use full width of the container */
+    box-sizing: border-box; /* Include padding in total width */
+    height: 40px; /* Set a fixed height for the input field */
+    transition: border-color 0.3s; /* Transition for border color */
+}
+
+/* Input field focus effect */
+.chat-box-footer input:focus {
+    border-color: #007bff; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+}
+
+/* Send button styles */
+.send-button {
+    position: absolute; /* Position the button inside the input */
+    right: 11px; /* Align to the right with some padding */
+    top: 10px; /* Center vertically */
+    border: none; /* Remove default button styling */
+    background: rgba(44, 80, 239, 0.21);
+    cursor: pointer; /* Change cursor to pointer */
+    width: 20px; /* Set a specific width for the button */
+    height: 20px; /* Set a specific height for the button */
+    border-radius: 25px;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Transition for color and scale */
+}
+
+/* Send button active color */
+.send-button.active {
+    color: #ff5a8d; /* Change color when active */
+}
+
+/* Send button hover effect */
+.send-button:hover {
+    background-color: #ff5a8d; /* Change background color on hover */
+    transform: scale(1.2); /* Scale up on hover */
+    box-shadow: 0 0 10px rgba(255, 105, 180, 0.5), 0 0 20px rgba(255, 105, 180, 0.5)
+}
+
+/* Arrow styles for the send button */
+.send-button .arrow {
+    position: absolute;
+    right: 2px;
+    bottom: 4px;
+    scale: 50%;
+    width: 0;
+    height: 0;
+    margin-right: 5;
+    border-left: 8px solid transparent; /* Left side of the arrow */
+    border-right: 8px solid transparent; /* Right side of the arrow */
+    border-bottom: 12px solid white; /* Bottom side of the arrow */
+    border-radius: 2px; /* Optional: Slightly round the edges of the arrow */
+}
+
+/* Modal styles */
+.modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1);
+    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+}
+
+/* Modal content styles */
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--white);
+    padding: 1rem 1.5rem;
+    width: 24rem;
+    border-radius: 0.5rem;
+}
+
+/* Modal close button styles */
+.modal-close-button {
+    float: right; /* Corrected this line */
+    width: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    background-color: lightgray;
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+/* Modal close button hover effect */
+.modal-close-button:hover {
+    background-color: darkgray; /* Change color on hover */
+}
+
+/* Show chat class for visibility */
+.show-chat {
+    visibility: visible; /* Ensure it is visible */
+    opacity: 1; /* Fully opaque */
+    transform: scale(1) translate(0, 0); /* Scale to full size */
+    transition: visibility 0s linear 0s, opacity 0.3s ease, transform 0.3s ease; /* Transition for showing */
+}
+
+/* Typing animation for bot */
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+/* Dots animation */
+.typing-indicator .dot {
+    height: 8px;
+    width: 8px;
+    margin: 0 3px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    animation: bounce 0.6s infinite alternate;
+}
+
+.typing-indicator .dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator .dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Responsive styles for smaller screens */
+@media only screen and (max-width: 450px) {
+    .chat-box {
+        min-width: 100% !important;
+        height: 100vh; /* Fullscreen height */
+        width: 100vw; /* Fullscreen width */
+        border-radius: 0; /* No border radius for fullscreen */
+        margin: 0; /* Remove all margins */
+    }
+}
+
+.welcome-message {
+    text-align: center; /* Center align the text */
+    margin: 20px 0; /* Add margin to the top and bottom */
+}
+
+.big-bot-profile-pic {
+    width: 200px; /* Set width for the larger profile picture */
+    height: 200px; /* Set height for the larger profile picture */
+    margin-bottom: 10px; /* Space below the image */
+    animation: breathe-large 3s ease-in-out infinite; /* Breathing animation */
+    filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.5)); /* Glow effect */
+}
+
+/* Breathing animation for the large bot profile picture */
+@keyframes breathe-large {
+    0%, 100% {
+        transform: translateY(0); /* Start position */
+    }
+    50% {
+        transform: translateY(-5px); /* Move up */
+    }
+}
+
+.welcome-text {
+    margin: 0 15px; /* Add margin to the right and left */
+}
+
+.welcome-text p {
+    margin: 5px 0; /* Space between paragraphs */
+}
+
+.small-text {
+    font-size: 12px; /* Smaller font size for the last text */
+}
+
+/*//////////// FAQ System ////////////*/
+
+/* FAQ button styles */
+.faq-button {
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    line-height: 2.25;
+    border-radius: 25px;
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+/* FAQ button hover effect */
+.faq-button:hover {
+    background-color: lightgray; /* Change color on hover */
+}
+
+.quick-responses {
+    margin-top: 10px; /* Space above the quick responses */
+}
+
+.quick-response-button {
+    margin: 5px; /* Space between buttons */
+    padding: 10px; /* Padding for buttons */
+    border: none
+}

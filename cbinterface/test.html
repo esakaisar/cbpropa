@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="test.css"> <!-- Link to your external CSS file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>TanyaLaras Chatbot</title>
+</head>
+<body>
+    <div class="chat-button">
+        <span>Tanya<span class="bold">Laras</span>!</span>
+    </div>
+
+    <div class="chat-box">
+        <div class="chat-box-header">
+            <h3>Tanya<b>Laras</b></h3>
+            <div class="header-actions">
+                <p class="close-button" aria-label="Close chat"><i class="fas fa-times"></i></p>
+            </div>
+        </div>
+        
+        <div class="chat-box-body">
+            <!-- Quick Responses Section -->
+            <div class="quick-responses" style="display: none;">
+                <h4>Quick Responses</h4>
+                <button class="quick-response-button">What is your name?</button>
+                <button class="quick-response-button">What can you do?</button>
+                <button class="quick-response-button">Tell me a joke!</button>
+                <button class="quick-response-button">Help with my order.</button>
+                <button class="quick-response-button">Contact support.</button>
+                <button class="back-to-quick-responses">Back to Quick Responses</button>
+            </div>
+        </div>
+
+        <div class="chat-box-footer">
+            <div class="input-button-container">
+                <input type="text" placeholder="Type your message..." id="chatInput">
+                <button class="send-button" id="sendButton">
+                    <div class="arrow"></div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="test.js"></script> <!-- Link to your external JavaScript file -->
+</body>
+</html>
