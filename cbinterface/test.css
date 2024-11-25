@@ -346,6 +346,13 @@ body {
     outline: none; /* Remove default outline */
 }
 
+/* Placeholder text styles */
+.chat-box-footer input::placeholder {
+    color: lightgray; /* Set the placeholder text color */
+    opacity: 1; /* Ensures the placeholder is fully opaque */
+    transition: opacity 0.3s; /* Smooth transition for placeholder */
+}
+
 /* Send button styles */
 .send-button {
     position: absolute; /* Position the button inside the input */
@@ -516,32 +523,4 @@ body {
 
 .small-text {
     font-size: 12px; /* Smaller font size for the last text */
-}
-
-/*//////////// FAQ System ////////////*/
-
-/* FAQ button styles */
-.faq-button {
-    cursor: pointer;
-    height: 30px;
-    width: 30px;
-    text-align: center;
-    line-height: 2.25;
-    border-radius: 25px;
-    transition: background-color 0.3s; /* Smooth transition */
-}
-
-/* FAQ button hover effect */
-.faq-button:hover {
-    background-color: lightgray; /* Change color on hover */
-}
-
-.quick-responses {
-    margin-top: 10px; /* Space above the quick responses */
-}
-
-.quick-response-button {
-    margin: 5px; /* Space between buttons */
-    padding: 10px; /* Padding for buttons */
-    border: none
 }

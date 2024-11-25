@@ -204,4 +204,44 @@ $(document).ready(function() {
             $('#sendButton').css('background-color', ''); // Reset button color
         }
     });
+
+    // Variable to track the state of the welcome message
+    let isWelcomeMessageVisible = true;
+
+    // Event listener for input field focus
+    $('.chat-box-footer input').on('focus', function() {
+        // Set the placeholder to the initial message if the welcome message is visible
+        if (isWelcomeMessageVisible) {
+            $(this).attr('placeholder', 'Apa saja yang bisa saya tanyakan?');
+        }
+    });
+
+    // Event listener for input field blur
+    $('.chat-box-footer input').on('blur', function() {
+        // If the input is empty and the welcome message is still visible
+        if ($(this).val().length === 0 && isWelcomeMessageVisible) {
+            // Change the placeholder to "Type your message..." when the input is empty
+            $(this).attr('placeholder', 'Type your message...');
+        }
+    });
+
+    // Set the flag to false when the user sends the first message
+    $('.send-button').on('click', function() {
+        if (chatHistory.length === 0) {
+            $('.welcome-message').remove(); // Hide the welcome message when the first message is sent
+            isWelcomeMessageVisible = false; // Update the state to indicate that the welcome message is no longer visible
+            
+            // Set the placeholder to "Type your message..." after the welcome message is hidden
+            $('.chat-box-footer input').attr('placeholder', 'Type your message...');
+        }
+    });
+
+    // Prevent any placeholder change on input event after the welcome message is hidden
+    $('.chat-box-footer input').on('input', function() {
+        // If the welcome message is no longer visible, ensure the placeholder remains "Type your message..."
+        if (!isWelcomeMessageVisible) {
+            $(this).attr('placeholder', 'Type your message...');
+        }
+    });
+
 });
